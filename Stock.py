@@ -26,19 +26,19 @@ def new_stuff():
 
         name = input("stuff's name : ")
         existence = input("stuff's existence : ")
-        stock[code] = {"name": name, "exist": existence}
+        stock[code] = {"Name": name, "Exist": existence}
         print()
 
 
 def show_all_stuffs():
     """Showing all Stuffs list"""
 
-    print()
     if not stock:
-        print("\nNothing in Stock")
+        print("There is not anything in stock")
     else:
+        print("--------------------------")
         for code in stock:
-            print(f"{code = }")
+            print(f"Code ... ...{code}")
             for key, val in stock.get(code).items():
                 print(f"{key} ... ... {val}")
             print("--------------------------")
@@ -48,12 +48,12 @@ def show_one_stuff():
     """Showing a specific stuff in list by its code """
 
     if not stock:
-        print("Nothing in Stock")
+        print("There is not anything in stock")
     else:
         print()
-        code = input("Stuff's code : ")
+        code = input("Stuff's code ?  :  ")
         show = stock.get(code, "it is not in list")
-        print(f"\n{code = }")
+        print(f"\nCode .... ...{code}")
         for key, val in show.items():
             print(f"{key} .... ... {val}")
 
@@ -62,9 +62,27 @@ def edit_stufff():
     pass
 
 
-def main_program():
+def del_stuff():
+    """delete stuff from list"""
+
+    code = input(
+        """which stuff you want to delete ?\n[type "Show" for what is in list]\ncode: """)
+    if code == "Show":
+        show_all_stuffs()
+    else:
+        if not stock:
+            print("There is not anything in stock")
+        else:
+            if code in stock:
+                del stock[code]
+                print(f"\nstuff with {code = } deleted Successfully! \n")
+            else:
+                print(f"\nstuff with {code = } is not in list\n")
+
+
+def _main():
     """main program to interact with User"""
-    user = "Command me according to Menu ? [H for Help] : "
+    user = "Command [H for Help] : "
     print()
     while (user_input := input(user)) != "Exit":
 
@@ -76,8 +94,10 @@ def main_program():
             show_one_stuff()
         elif user_input == "H":
             _help()
+        elif user_input == "Del":
+            del_stuff()
 
 
 if __name__ == "__main__":
-    main_program()
+    _main()
     print("\nHave a good Day. Bye!\n")
