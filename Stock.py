@@ -11,7 +11,7 @@ def _help():
           Edt   : Edit stuff
           Info  : Info about one stuff
           Show  : Show all stuffs
-          Exit  : Exit
+          Exit  : Exit Or [Ctrl ^ c]
 
           *** Notice! Sensitive to Lower or Upper Case Letters ***
 
@@ -58,8 +58,44 @@ def show_one_stuff():
             print(f"{key} .... ... {val}")
 
 
-def edit_stufff():
-    pass
+def edit_stuff():
+    
+    if not stock:
+        print("There is not anything in stock")
+
+    else :
+        print(""" 
+              [1]  : for Editing Stuff's code
+              [2]  : for Editing Stuff's name or existence 
+              Done : Exit editing
+              Show : Show Stock List
+          """)
+
+        while (user_input := input("choose [1 Or 2] to Edit : ")) != "Done":
+
+            # Edit Stuff's Code
+            if user_input == "1":
+
+                print("Editing Stuff's Code! ")
+                code1 = input("previous Code? : ")
+                code2 = input("New Code? : ")
+
+                stock[code2] = stock[code1]
+                del stock[code1]
+
+            # Edit Stuff's Name or existence
+            elif user_input == "2":
+
+                print("Editing Stuff's Name or existence! ")
+                code = input("Stuff's Code? : ")
+                name = input("Stuff's New Name ? : ")
+                existence = input("Stuff's New Existence : ")
+
+                stock[code]["Name"] = name
+                stock[code]["Exist"] = existence
+
+            elif user_input == "Show":
+                show_all_stuffs()
 
 
 def del_stuff():
@@ -96,8 +132,13 @@ def _main():
             _help()
         elif user_input == "Del":
             del_stuff()
+        elif user_input == "Edt":
+            edit_stuff()
 
 
 if __name__ == "__main__":
-    _main()
-    print("\nHave a good Day. Bye!\n")
+    try:
+        _main()
+
+    except KeyboardInterrupt:
+        print("\nHave a good Day. Bye!\n")
