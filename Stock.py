@@ -1,6 +1,4 @@
 """This is a Stock List Program"""
-from typing import final
-
 
 stock = {}
 
